@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>شاليهات الروابي - المنيو</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f7f0e7;
+  --card:#ffffff;
+  --text:#17342d;
+  --muted:#6f7f79;
+  --green:#0d8f73;
+  --green-2:#14a181;
+  --gold:#b89052;
+  --line:#eee4d6;
+  --shadow:0 18px 40px rgba(27,39,34,.10);
+  --shadow-lg:0 28px 60px rgba(27,39,34,.16);
+}
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Cairo',-apple-system,BlinkMacSystemFont,sans-serif}
+html,body{overflow-x:hidden}
+body{
+  min-height:100vh;
+  color:var(--text);
+  background:
+    radial-gradient(circle at top right, rgba(184,144,82,.14), transparent 22%),
+    radial-gradient(circle at bottom left, rgba(13,143,115,.10), transparent 28%),
+    linear-gradient(180deg,#fcf8f2 0%,#f4ede4 100%);
+}
+.container{max-width:1320px;margin:0 auto;padding:18px 18px 130px}
+.hero{
+  position:relative;min-height:280px;border-radius:36px;overflow:hidden;box-shadow:var(--shadow-lg);margin-bottom:18px;
+  background:#d7d0c7 center/cover no-repeat;
+}
+.hero::before{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(17,23,21,.08) 0%,rgba(17,23,21,.24) 36%,rgba(17,23,21,.72) 100%)}
+.hero-content{position:absolute;inset:auto 22px 22px 22px;z-index:2;display:flex;justify-content:space-between;align-items:flex-end;gap:18px}
+.hero-copy{max-width:760px}
+.hero-pill{display:inline-flex;align-items:center;gap:8px;padding:10px 16px;border-radius:999px;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.14);backdrop-filter:blur(12px);color:#fff;font-size:12px;font-weight:800;margin-bottom:12px}
+.hero h1{font-size:38px;color:#fff;font-weight:900;line-height:1.2;margin-bottom:8px}
+.hero p{max-width:660px;color:rgba(255,255,255,.92);font-size:14px;line-height:1.9}
+.hero-logo{width:92px;height:92px;border-radius:30px;display:grid;place-items:center;flex:0 0 92px;background:rgba(255,255,255,.14);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.14);color:#fff;font-size:38px;font-weight:900}
+.hero-thumbs{position:absolute;top:16px;left:16px;z-index:2;display:flex;gap:8px}
+.hero-thumbs img{width:68px;height:68px;border-radius:18px;object-fit:cover;border:2px solid rgba(255,255,255,.72);box-shadow:0 10px 24px rgba(0,0,0,.16)}
+.booking-bar{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:18px}
+.field{padding:14px 16px;border-radius:24px;background:rgba(255,255,255,.95);border:1px solid var(--line);box-shadow:var(--shadow)}
+.field label{display:block;color:var(--muted);font-size:12px;font-weight:800;margin-bottom:7px}
+.field input,.field select{width:100%;border:none;background:transparent;outline:none;font-size:15px;font-weight:800;color:#16322c}
+.categories{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:18px}
+.category-btn{border:none;cursor:pointer;padding:12px 18px;border-radius:999px;background:#fff;color:#33554d;border:1px solid var(--line);font-size:13px;font-weight:800;transition:.22s ease;box-shadow:0 8px 16px rgba(0,0,0,.03)}
+.category-btn.active{background:linear-gradient(180deg,var(--green-2),var(--green));color:#fff;border-color:transparent;box-shadow:0 18px 28px rgba(13,143,115,.20)}
+.menu-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(295px,1fr));gap:20px}
+.menu-card{background:linear-gradient(180deg,#fff,#fffdfa);border:1px solid var(--line);border-radius:32px;overflow:hidden;box-shadow:var(--shadow);transition:.25s ease;cursor:pointer;position:relative}
+.menu-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg)}
+.menu-card.active{border-color:var(--green);box-shadow:0 0 0 1px var(--green),0 24px 52px rgba(13,143,115,.14)}
+.image-wrap{position:relative;height:240px;overflow:hidden}
+.image-wrap img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .45s ease}
+.menu-card:hover .image-wrap img{transform:scale(1.05)}
+.image-wrap::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.04),rgba(0,0,0,.26))}
+.image-badge,.image-price{position:absolute;z-index:2;padding:8px 12px;border-radius:999px;background:rgba(255,255,255,.86);backdrop-filter:blur(12px);font-size:11px;font-weight:900;color:#163f36}
+.image-badge{top:16px;right:16px}
+.image-price{bottom:16px;left:16px}
+.gallery-strip{position:absolute;bottom:16px;right:16px;z-index:2;display:flex;gap:6px}
+.gallery-strip img{width:42px;height:42px;border-radius:12px;object-fit:cover;border:2px solid rgba(255,255,255,.8);box-shadow:0 6px 14px rgba(0,0,0,.16)}
+.menu-card-content{padding:18px}
+.title-row{display:flex;justify-content:space-between;gap:12px;align-items:flex-start;margin-bottom:8px}
+.title-row h3{font-size:20px;font-weight:900;line-height:1.35;color:#112922}
+.title-row .subtitle{font-size:12px;color:#8b6f44;background:#fbf2e5;border:1px solid #f1dfc0;padding:7px 10px;border-radius:999px;font-weight:800;white-space:nowrap}
+.menu-card p{font-size:13px;line-height:1.95;color:#667984;margin-bottom:12px;min-height:52px}
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px}.tag{padding:8px 11px;border-radius:999px;background:#f4fbf8;border:1px solid #d9efe6;color:#0e6050;font-size:11px;font-weight:900}
+.pick-row{display:flex;align-items:center;justify-content:space-between;gap:12px}.pick-note{font-size:12px;color:var(--muted)}
+.select-btn{border:none;cursor:pointer;padding:12px 16px;border-radius:18px;color:#fff;font-size:13px;font-weight:900;background:linear-gradient(180deg,var(--green-2),var(--green));box-shadow:0 14px 24px rgba(13,143,115,.18)}
+.floating-cart-btn{position:fixed;bottom:24px;right:24px;width:68px;height:68px;border:none;border-radius:50%;background:linear-gradient(180deg,var(--green-2),var(--green));color:#fff;font-size:26px;cursor:pointer;display:grid;place-items:center;box-shadow:0 24px 44px rgba(13,143,115,.28);z-index:80}
+.cart-count{position:absolute;top:-3px;left:-3px;width:24px;height:24px;border-radius:50%;display:grid;place-items:center;background:#122621;color:#fff;font-size:11px;font-weight:900}
+.cart-container{position:fixed;bottom:104px;right:20px;width:410px;max-width:calc(100vw - 28px);display:none;z-index:90}
+.cart-box{background:rgba(255,255,255,.98);backdrop-filter:blur(18px);border-radius:32px;border:1px solid var(--line);box-shadow:0 28px 60px rgba(0,0,0,.16);padding:18px}
+.cart-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}.cart-header h3{font-size:21px;font-weight:900;color:#0f1e1a}
+.close-btn{border:none;cursor:pointer;width:38px;height:38px;border-radius:50%;background:#f4f6f8;color:#25323a;font-size:22px}
+.preview-cover{height:160px;border-radius:24px;overflow:hidden;margin-bottom:14px;background:#e9e2d8;display:none}.preview-cover img{width:100%;height:100%;object-fit:cover;display:block}
+.booking-summary{line-height:1.95}.booking-summary .name{font-size:17px;font-weight:900;color:#112922;margin-bottom:4px}
+.summary-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}.summary-grid .cell{background:#f7faf8;border:1px solid #e7efeb;border-radius:18px;padding:11px}.summary-grid small{display:block;color:#7a8782;font-size:11px;margin-bottom:4px}.summary-grid strong{font-size:13px;color:#18362f}
+.total-box{display:flex;justify-content:space-between;align-items:center;margin:18px 0;padding-top:16px;border-top:1px solid #ece6dc}.total-box span:first-child{font-weight:800;color:#60716c}.total-box span:last-child{font-size:26px;font-weight:900;color:#0b8f72}
+.cart-actions{display:flex;gap:12px}.checkout-btn,.clear-btn{border:none;cursor:pointer;border-radius:20px;padding:15px 16px;font-size:14px;font-weight:900;flex:1}.checkout-btn{background:linear-gradient(180deg,var(--green-2),var(--green));color:#fff;box-shadow:0 14px 24px rgba(13,143,115,.16)}.clear-btn{background:#f4f6f8;color:#334155}
+.footer{text-align:center;padding:22px 0 8px;color:#95a19c;font-size:13px}
+@media(max-width:1100px){.booking-bar{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:768px){.container{padding:14px 14px 120px}.hero{min-height:250px;border-radius:28px}.hero-content{flex-direction:column;align-items:flex-start}.hero h1{font-size:28px}.hero p{font-size:13px}.hero-logo{width:76px;height:76px;border-radius:24px;font-size:30px}.hero-thumbs img{width:54px;height:54px;border-radius:14px}.booking-bar,.menu-grid,.summary-grid{grid-template-columns:1fr}.cart-container{left:14px;right:14px;bottom:94px;width:auto}.floating-cart-btn{bottom:16px;right:16px;width:62px;height:62px;font-size:24px}}
+</style>
+</head>
+<body>
+<div class="container">
+  <header class="hero" id="heroHeader">
+    <div class="hero-thumbs" id="heroThumbs"></div>
+    <div class="hero-content">
+      <div class="hero-copy">
+        <div class="hero-pill">منيو الحجز • صور حقيقية • رجوع تلقائي إلى واتساب</div>
+        <h1>اختر الشاليه المناسب</h1>
+        <p>اختر الشاليه، حدّد تاريخ الدخول والخروج، ثم اضغط على <strong>تأكيد الحجز</strong> ليتم الرجوع تلقائيًا إلى واتساب وإكمال الدفع.</p>
+      </div>
+      <div class="hero-logo">ر</div>
+    </div>
+  </header>
+
+  <div class="booking-bar">
+    <div class="field"><label>تاريخ الدخول</label><input type="date" id="checkIn"></div>
+    <div class="field"><label>تاريخ الخروج</label><input type="date" id="checkOut"></div>
+    <div class="field"><label>عدد الأشخاص</label><select id="guestCount"></select></div>
+    <div class="field"><label>أجواء الحجز</label><select id="stayMood"><option>عائلي</option><option>استرخاء</option><option>جلسة خاصة</option><option>أطفال</option></select></div>
+  </div>
+
+  <nav class="categories">
+    <button class="category-btn active" data-category="all">الكل</button>
+    <button class="category-btn" data-category="garden">جاردن</button>
+    <button class="category-btn" data-category="pool">Pool View</button>
+    <button class="category-btn" data-category="premium">Premium</button>
+    <button class="category-btn" data-category="kids">ألعاب مائية</button>
+  </nav>
+
+  <main class="menu-grid" id="menuGrid"></main>
+  <footer class="footer">Shalihat Al Rawabi • Luxury Booking Demo</footer>
+</div>
+
+<button class="floating-cart-btn" onclick="toggleCart()">✓<span class="cart-count" id="cartCount">0</span></button>
+<div class="cart-container" id="cartContainer">
+  <div class="cart-box">
+    <div class="cart-header"><h3>ملخص الحجز</h3><button class="close-btn" onclick="toggleCart()">×</button></div>
+    <div class="preview-cover" id="previewCover"><img id="previewImage" src="" alt="preview"></div>
+    <div id="cartItems"><p style="text-align:center;color:rgba(0,0,0,.42);padding:20px">اختر الشاليه أولاً</p></div>
+    <div class="total-box"><span>الإجمالي</span><span id="cartTotal">٠.٠٠ ريال</span></div>
+    <div class="cart-actions"><button class="clear-btn" onclick="clearSelection()">إلغاء</button><button class="checkout-btn" onclick="openCheckout()">تأكيد الحجز</button></div>
+  </div>
+</div>
+
+<script>
+const items=[
+  {id:1,name:'شاليه الروابي جاردن',label:'Garden Retreat',description:'مساحة خضراء واسعة مع جلسة عائلية هادئة ومسبح خاص يمنح الضيوف خصوصية وراحة طوال فترة الإقامة.',price:520,image:'images/chalet-garden-main.jpg',gallery:['images/chalet-garden-gallery-1.jpg','images/hero-thumb-1.jpg'],category:'garden',guests:10,rooms:2,pool:'مسبح خاص'},
+  {id:2,name:'شاليه الروابي Pool View',label:'Pool View',description:'إطلالة مباشرة على المسبح مع جلسة خشبية أنيقة وتكوين بصري فاخر يعطي إحساسًا بالهدوء والاسترخاء.',price:680,image:'images/chalet-pool-main.jpg',gallery:['images/chalet-pool-gallery-1.jpg','images/hero-thumb-2.jpg'],category:'pool',guests:12,rooms:3,pool:'جلسة + مسبح'},
+  {id:3,name:'شاليه الروابي Premium',label:'Premium Stay',description:'واجهة أنيقة مع مسبح لامع وجلسة خارجية مرتبة، مناسب لمن يبحث عن تجربة أجمل ولمسة أكثر فخامة.',price:790,image:'images/chalet-premium-main.jpg',gallery:['images/chalet-premium-gallery-1.jpg','images/hero-thumb-1.jpg'],category:'premium',guests:14,rooms:3,pool:'Premium Pool'},
+  {id:4,name:'شاليه الروابي ألعاب مائية',label:'Family Fun',description:'خيار عائلي مميز مع ألعاب مائية للأطفال داخل المسبح ومساحة آمنة تعطي العائلة تجربة ترفيهية متكاملة.',price:940,image:'images/chalet-kids-main.jpg',gallery:['images/chalet-pool-gallery-1.jpg','images/hero-thumb-2.jpg'],category:'kids',guests:15,rooms:4,pool:'ألعاب مائية'}
+];
+const heroImages=['images/hero-main.jpg','images/hero-thumb-1.jpg','images/hero-thumb-2.jpg'];
+let selected=null;let currentHero=0;
+function formatDate(v){const d=new Date(v);return `${String(d.getDate()).padStart(2,'0')}/${String(d.getMonth()+1).padStart(2,'0')}/${d.getFullYear()}`}
+function nights(a,b){return Math.max(1,Math.ceil((new Date(b)-new Date(a))/86400000))}
+function setHero(){const hero=document.getElementById('heroHeader');hero.style.background=`center/cover no-repeat url('${heroImages[currentHero]}')`;document.getElementById('heroThumbs').innerHTML=heroImages.map(src=>`<img src="${src}" alt="thumb">`).join('')}
+function cycleHero(){currentHero=(currentHero+1)%heroImages.length;setHero()}
+function render(filter='all'){const grid=document.getElementById('menuGrid');grid.innerHTML='';items.filter(i=>filter==='all'||i.category===filter).forEach(item=>{const card=document.createElement('div');card.className='menu-card'+(selected&&selected.id===item.id?' active':'');card.innerHTML=`<div class="image-wrap"><img src="${item.image}" alt="${item.name}"><div class="image-badge">متاح للحجز</div><div class="image-price">${item.price} ر.س / ليلة</div><div class="gallery-strip">${item.gallery.map(src=>`<img src="${src}" alt="gallery">`).join('')}</div></div><div class="menu-card-content"><div class="title-row"><div><h3>${item.name}</h3></div><div class="subtitle">${item.label}</div></div><p>${item.description}</p><div class="tags"><span class="tag">👥 ${item.guests} ضيوف</span><span class="tag">🛏️ ${item.rooms} غرف</span><span class="tag">🏊 ${item.pool}</span></div><div class="pick-row"><div class="pick-note">اختيار هذا الشاليه للمتابعة</div><button class="select-btn">اختيار الشاليه</button></div></div>`;card.onclick=()=>{selected=item;render(filter);updateCart()};grid.appendChild(card)})}
+function updateCart(){const count=document.getElementById('cartCount');const itemsBox=document.getElementById('cartItems');const total=document.getElementById('cartTotal');const cover=document.getElementById('previewCover');const coverImg=document.getElementById('previewImage');const inDate=document.getElementById('checkIn').value;const outDate=document.getElementById('checkOut').value;const guests=document.getElementById('guestCount').value;count.textContent=selected?1:0;if(!selected){itemsBox.innerHTML='<p style="text-align:center;color:rgba(0,0,0,.42);padding:20px">اختر الشاليه أولاً</p>';total.textContent='٠.٠٠ ريال';cover.style.display='none';return}coverImg.src=selected.image;cover.style.display='block';const validDates=inDate&&outDate&&new Date(outDate)>new Date(inDate);const totalVal=validDates?selected.price*nights(inDate,outDate):selected.price;itemsBox.innerHTML=`<div class="booking-summary"><div class="name">${selected.name}</div><div class="summary-grid"><div class="cell"><small>الدخول</small><strong>${inDate?formatDate(inDate):'—'}</strong></div><div class="cell"><small>الخروج</small><strong>${outDate?formatDate(outDate):'—'}</strong></div><div class="cell"><small>عدد الأشخاص</small><strong>${guests}</strong></div><div class="cell"><small>سعر الليلة</small><strong>${selected.price} ر.س</strong></div></div></div>`;total.textContent=`${totalVal.toFixed(2)} ريال`}
+function toggleCart(){const box=document.getElementById('cartContainer');box.style.display=box.style.display==='block'?'none':'block'}
+function clearSelection(){selected=null;updateCart();render(document.querySelector('.category-btn.active').dataset.category);toggleCart()}
+function openCheckout(){const checkIn=document.getElementById('checkIn').value;const checkOut=document.getElementById('checkOut').value;const guests=+document.getElementById('guestCount').value;if(!selected){alert('اختر الشاليه أولاً');return}if(!checkIn||!checkOut||new Date(checkOut)<=new Date(checkIn)){alert('حدد تاريخ الدخول والخروج بشكل صحيح');return}const booking={name:selected.name,price:selected.price,image:selected.image,checkIn,checkOut,checkInFormatted:formatDate(checkIn),checkOutFormatted:formatDate(checkOut),guests,nights:nights(checkIn,checkOut),total:selected.price*nights(checkIn,checkOut)};localStorage.setItem('rawabiPendingBooking',JSON.stringify(booking));window.location.href=`index.html?booking=${encodeURIComponent(JSON.stringify(booking))}`}
+document.querySelectorAll('.category-btn').forEach(btn=>btn.onclick=function(){document.querySelectorAll('.category-btn').forEach(b=>b.classList.remove('active'));this.classList.add('active');render(this.dataset.category)});
+const t=new Date();t.setDate(t.getDate()+1);const o=new Date();o.setDate(o.getDate()+2);document.getElementById('checkIn').value=t.toISOString().split('T')[0];document.getElementById('checkOut').value=o.toISOString().split('T')[0];document.getElementById('guestCount').innerHTML=Array.from({length:20},(_,i)=>`<option value="${i+1}" ${i+1===2?'selected':''}>${i+1} أشخاص</option>`).join('');document.getElementById('checkIn').onchange=updateCart;document.getElementById('checkOut').onchange=updateCart;document.getElementById('guestCount').onchange=updateCart;setHero();setInterval(cycleHero,3200);render();updateCart();
+</script>
+</body>
+</html>

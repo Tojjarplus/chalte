@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Apple Pay</title>
+<style>
+*{box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif}body{margin:0;min-height:100vh;background:#f3f4f6;display:flex;align-items:center;justify-content:center;padding:16px}.container{width:100%;max-width:420px;background:#fff;border-radius:18px;box-shadow:0 10px 30px rgba(0,0,0,.08);overflow:hidden}.header{display:flex;justify-content:space-between;align-items:center;padding:20px;border-bottom:1px solid #f1f1f1}.brand{display:flex;align-items:center;gap:12px}.logo{width:48px;height:48px;border-radius:14px;background:#111;color:#fff;display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:700}.brand h2{margin:0;font-size:18px;color:#111827}.merchant{font-size:13px;color:#555;margin-top:4px}.summary{background:#f8f9fa;border-radius:12px;padding:18px;margin:20px;border:1px solid #e9ecef}.summary h4{margin:0 0 16px;color:#2d3748;font-size:17px}.row{display:flex;justify-content:space-between;margin-bottom:10px;color:#4a5568;font-size:15px}.row.total{margin-top:14px;padding-top:14px;border-top:2px solid #e2e8f0;font-weight:700;color:#1a202c;font-size:19px}.section{padding:0 20px 20px}.field{background:#fff;border:1px solid #e5e7eb;border-radius:12px;padding:16px 18px;font-size:16px}.label{display:block;color:#374151;font-size:15px;font-weight:500;margin-bottom:8px}.paybtn{width:calc(100% - 40px);margin:0 20px 20px;padding:18px;border:none;border-radius:14px;font-size:17px;font-weight:700;cursor:pointer;color:#fff;background:#111;box-shadow:0 4px 15px rgba(0,0,0,.2)}.status{margin:0 20px 20px;color:#374151;font-size:15px;text-align:center;padding:16px;background:#f8f9fa;border-radius:12px;border:1px solid #e9ecef}.success{display:none;padding:28px;text-align:center}.success h3{color:#111;font-size:24px;margin:12px 0}.success p{color:#4b5563;font-size:16px;line-height:1.6}
+</style>
+</head>
+<body>
+<div class="container" id="payPage">
+  <div class="header">
+    <div class="brand">
+      <div class="logo"></div>
+      <div>
+        <h2>Apple Pay</h2>
+        <div class="merchant">شاليهات الروابي</div>
+      </div>
+    </div>
+  </div>
+  <div class="summary">
+    <h4>ملخص الحجز</h4>
+    <div class="row"><span>الخدمة</span><span>حجز شاليه</span></div>
+    <div class="row"><span>نوع السداد</span><span id="planLabel">دفع كامل</span></div>
+    <div class="row total"><span>الإجمالي المطلوب</span><span id="payAmount">520.00 ر.س</span></div>
+  </div>
+  <div class="section">
+    <label class="label">وسيلة الدفع</label>
+    <div class="field">Apple Pay جاهز للدفع</div>
+  </div>
+  <button class="paybtn" id="payBtn">تأكيد بـ Apple Pay</button>
+  <div class="status" id="statusBox">بعد نجاح العملية سيتم الرجوع تلقائيًا إلى واتساب</div>
+  <div class="success" id="successPage">
+    <h3>تم الدفع بنجاح</h3>
+    <p id="successText">جاري الرجوع إلى واتساب...</p>
+  </div>
+</div>
+<script>
+const params=new URLSearchParams(window.location.search);const total=params.get('total')||'520.00';const plan=params.get('plan')||'full';const remaining=params.get('remaining')||'0.00';document.getElementById('payAmount').textContent=`${total} ر.س`;document.getElementById('planLabel').textContent=plan==='deposit'?'دفع عربون':'دفع كامل';if(plan==='deposit'){document.getElementById('successText').textContent=`المتبقي بعد العربون: ${remaining} ر.س • جاري الرجوع إلى واتساب...`;}document.getElementById('payBtn').addEventListener('click',function(){document.getElementById('statusBox').style.display='none';document.getElementById('payBtn').style.display='none';document.getElementById('successPage').style.display='block';setTimeout(()=>{window.location.href=`index.html?payment=success&source=applepay&plan=${encodeURIComponent(plan)}&total=${encodeURIComponent(total)}&remaining=${encodeURIComponent(remaining)}`},1600)});
+</script>
+</body>
+</html>
