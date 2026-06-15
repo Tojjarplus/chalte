@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>الروابي شاليهات - واتساب</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{width:100%;height:100%;overflow:hidden;overscroll-behavior:none}
+body{position:fixed;inset:0;background:radial-gradient(circle at top,#eef4fb 0%,#dfe8f2 40%,#d4dde8 100%);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif}
+.phone-stage{width:100%;height:100%;display:flex;align-items:center;justify-content:center;padding:18px}
+.iphone-frame{position:relative;width:min(100%,392px);height:min(844px,calc(100dvh - 24px));background:linear-gradient(180deg,#1d1d1f 0%,#050505 100%);border-radius:58px;padding:12px;box-shadow:0 35px 80px rgba(0,0,0,.30),inset 0 0 0 1px rgba(255,255,255,.06);flex:0 0 auto}
+.iphone-frame::before{content:'';position:absolute;top:11px;left:50%;transform:translateX(-50%);width:134px;height:35px;border-radius:24px;background:#000;z-index:5;box-shadow:0 6px 16px rgba(0,0,0,.35)}
+.iphone-frame::after{content:'';position:absolute;right:6px;top:120px;width:4px;height:88px;background:rgba(255,255,255,.12);border-radius:4px}
+.screen{height:100%;border-radius:46px;overflow:hidden;background:#ece5dd;display:flex;flex-direction:column;position:relative}
+.whatsapp-header{background:linear-gradient(180deg,#0b6d5d 0%,#0b8f72 100%);color:#fff;padding:54px 16px 14px;display:flex;align-items:center;gap:12px;flex:0 0 auto}
+.back-btn,.header-icons i{font-size:18px;cursor:pointer}
+.restaurant-info{display:flex;align-items:center;gap:10px;flex:1}
+.restaurant-avatar{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,#d8ba86,#9a6d34);display:grid;place-items:center;font-weight:800;box-shadow:inset 0 0 0 2px rgba(255,255,255,.20)}
+.restaurant-details h2{font-size:17px;font-weight:800;display:flex;align-items:center;gap:6px}
+.restaurant-details p{font-size:12px;opacity:.92}
+.verify{width:18px;height:18px;border-radius:50%;background:#3db5ff;color:#fff;display:grid;place-items:center;font-size:11px}
+.header-icons{display:flex;gap:14px}
+.chat-area{flex:1;overflow:auto;padding:14px 12px;background:radial-gradient(circle at 24px 24px,rgba(255,255,255,.25) 2px,transparent 2px),radial-gradient(circle at 76px 76px,rgba(255,255,255,.12) 2px,transparent 2px),#ece5dd;background-size:100px 100px;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;touch-action:pan-y}
+.chat-content{display:flex;flex-direction:column;gap:10px;padding-bottom:8px}
+.date-label{align-self:center;background:rgba(255,255,255,.92);padding:6px 12px;border-radius:999px;font-size:12px;color:#6f7c77;box-shadow:0 6px 16px rgba(0,0,0,.06)}
+.message{max-width:88%;padding:11px 13px;border-radius:18px;line-height:1.85;font-size:14px;box-shadow:0 8px 20px rgba(0,0,0,.05);animation:fadeIn .25s ease}
+.message.bot{align-self:flex-start;background:#fff;border-top-right-radius:6px}
+.message.user{align-self:flex-end;background:#dcf8c6;border-top-left-radius:6px}
+.message-time{display:block;text-align:left;margin-top:5px;font-size:10px;color:#87938e}
+.card{background:rgba(255,255,255,.97);border:1px solid #e4ebe6;border-radius:22px;padding:12px;box-shadow:0 10px 22px rgba(0,0,0,.06);animation:fadeIn .25s ease}
+.reply-btn,.action-btn,.ghost-btn{width:100%;border:none;border-radius:15px;padding:14px 16px;font-family:inherit;font-size:15px;font-weight:800;cursor:pointer;transition:.2s ease;margin-top:8px}
+.reply-btn:first-child,.action-btn:first-child,.ghost-btn:first-child{margin-top:0}
+.reply-btn{background:#fff;border:1px solid #dce7e1;color:#164038}
+.reply-btn.primary,.action-btn{background:linear-gradient(180deg,#0da27f,#0b8f72);color:#fff;box-shadow:0 10px 22px rgba(11,143,114,.18)}
+.ghost-btn{background:#f7faf8;border:1px solid #dce7e1;color:#0e5e50}
+.pay-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}
+.pay-grid .pay-option:last-child{grid-column:1 / -1}
+.pay-option{background:#fff;border:1px solid #dfe7e2;border-radius:18px;padding:14px;cursor:pointer;transition:.2s ease}
+.pay-option.active{background:linear-gradient(180deg,#f5fffb,#eefdf7);border-color:#0b8f72;box-shadow:inset 0 0 0 1px #0b8f72}
+.pay-option strong{display:block;font-size:14px;color:#173830;margin-bottom:6px}
+.pay-option span{display:block;font-size:12px;color:#75817c;line-height:1.6}
+.pay-option b{display:block;margin-top:10px;color:#0d6152}
+.summary-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
+.summary-grid div{background:#f8fbf9;border:1px solid #e8eeea;border-radius:14px;padding:10px}
+.summary-grid small{display:block;color:#74817d;font-size:11px;margin-bottom:4px}
+.summary-grid strong{font-size:13px;color:#18342e}
+.note{background:linear-gradient(180deg,#fff9ef,#fff4df);color:#7a6438;border:1px solid #f3e0ba;border-radius:15px;padding:10px 11px;font-size:12px;line-height:1.75;margin-bottom:10px}
+.receipt-mini{margin-top:10px;padding:12px;border-radius:18px;background:#f7faf8;border:1px solid #e6efea;line-height:1.9;font-size:13px;color:#244138}
+.input-area{display:flex;gap:8px;align-items:center;padding:10px 12px 14px;background:#f7f7f7;border-top:1px solid rgba(0,0,0,.05);flex:0 0 auto}
+.input-area input{flex:1;border:none;outline:none;background:#fff;border-radius:24px;padding:12px 15px;font-size:13px;box-shadow:0 6px 14px rgba(0,0,0,.05)}
+.send-btn{width:40px;height:40px;border:none;border-radius:50%;background:linear-gradient(180deg,#0d9d7d,#0b8f72);color:#fff;font-size:16px;cursor:pointer}
+.hidden-receipt{position:fixed;left:-9999px;top:0;width:800px;background:#fff;padding:28px;font-family:'Arial',sans-serif;color:#102821}
+.receipt-sheet{border:1px solid #dfe7e2;border-radius:26px;padding:24px;background:linear-gradient(180deg,#ffffff,#fafdfb)}
+.receipt-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}
+.receipt-brand{font-size:28px;font-weight:900;color:#0b6d5d}
+.receipt-tag{font-size:13px;padding:8px 12px;border-radius:999px;background:#eefaf6;border:1px solid #d8eee4;color:#0f6957;font-weight:700}
+.receipt-title{font-size:24px;font-weight:900;margin-bottom:12px}
+.receipt-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px}
+.receipt-grid .cell{border:1px solid #e7efeb;border-radius:18px;padding:14px;background:#f8fbf9}
+.receipt-grid small{display:block;font-size:12px;color:#6f7f79;margin-bottom:4px}
+.receipt-grid strong{font-size:15px;color:#16322c}
+.receipt-total{margin-top:18px;padding-top:18px;border-top:1px dashed #cfdcd6;display:flex;justify-content:space-between;align-items:center;font-size:16px;font-weight:800}
+.receipt-footer{margin-top:18px;padding:14px 16px;border-radius:18px;background:#fff7ea;border:1px solid #f0dfbc;color:#6e5a31;font-size:13px;line-height:1.9}
+@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+@media (max-width:900px){.phone-stage{padding:10px}.iphone-frame{width:min(100%,408px);height:min(100dvh - 12px,844px)}}
+@media (max-width:768px){.phone-stage{padding:0}.iphone-frame{width:100%;height:100dvh;border-radius:0;padding:0;box-shadow:none}.iphone-frame::before,.iphone-frame::after{display:none}.screen{border-radius:0}.whatsapp-header{padding-top:46px}}
+@media (min-width:769px) and (max-width:1200px){.iphone-frame{width:min(100%,404px);height:min(850px,calc(100dvh - 24px))}}
+</style>
+</head>
+<body>
+<div class="phone-stage">
+  <div class="iphone-frame">
+    <div class="screen">
+      <div class="whatsapp-header">
+        <div class="back-btn"><i class="fas fa-chevron-right"></i></div>
+        <div class="restaurant-info">
+          <div class="restaurant-avatar">ر</div>
+          <div class="restaurant-details">
+            <h2>الروابي شاليهات <span class="verify">✓</span></h2>
+            <p>متصل الآن</p>
+          </div>
+        </div>
+        <div class="header-icons"><i class="fas fa-video"></i><i class="fas fa-phone"></i><i class="fas fa-ellipsis-v"></i></div>
+      </div>
+      <div class="chat-area"><div class="chat-content" id="chatContent"></div></div>
+      <div class="input-area"><i class="fas fa-paperclip" style="color:#666;font-size:20px"></i><input type="text" placeholder="اكتب رسالة..." readonly><button class="send-btn"><i class="fas fa-paper-plane"></i></button></div>
+    </div>
+  </div>
+</div>
+
+<div class="hidden-receipt" id="receiptTemplate">
+  <div class="receipt-sheet">
+    <div class="receipt-head">
+      <div>
+        <div class="receipt-brand">الروابي شاليهات</div>
+        <div class="receipt-title">تفاصيل الحجز / إيصال الدفع</div>
+      </div>
+      <div class="receipt-tag" id="receiptStatus">تم تأكيد الحجز</div>
+    </div>
+    <div class="receipt-grid" id="receiptGrid"></div>
+    <div class="receipt-total"><span>الإجمالي المدفوع</span><span id="receiptPaid">0.00 ر.س</span></div>
+    <div class="receipt-footer" id="receiptFooter">هذا الملف تم إنشاؤه تلقائيًا بعد تأكيد السداد ويمكن حفظه PDF أو إرفاقه ضمن ملفات GitHub للمشروع.</div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script>
+const chat = document.getElementById('chatContent');
+const DEPOSIT_RATE = 0.30;
+const PDF_ATTACHMENT_URL = 'documents/rawabi-attached.pdf';
+let paymentMethod = '';
+let paymentPlan = '';
+let paymentAmount = 0;
+let paymentRemaining = 0;
+let completedReceipt = null;
+
+function timeNow(){const d=new Date();return `${String(d.getHours()).padStart(2,'0')}:${String(d.getMinutes()).padStart(2,'0')}`}
+function money(v){return Number(v||0).toFixed(2)}
+function addMessage(type,text){const div=document.createElement('div');div.className=`message ${type}`;div.innerHTML=`${text}<span class='message-time'>${timeNow()}</span>`;chat.appendChild(div);chat.parentElement.scrollTop=chat.parentElement.scrollHeight}
+function addCard(html){const div=document.createElement('div');div.className='card';div.innerHTML=html;chat.appendChild(div);chat.parentElement.scrollTop=chat.parentElement.scrollHeight;return div}
+function getBooking(){const params=new URLSearchParams(window.location.search);const encoded=params.get('booking');if(encoded){try{return JSON.parse(decodeURIComponent(encoded))}catch(e){}}
+const local=localStorage.getItem('rawabiPendingBooking');if(local){try{return JSON.parse(local)}catch(e){}}
+const complete=localStorage.getItem('rawabiCompletedBooking');if(complete){try{return JSON.parse(complete)}catch(e){}}
+return null}
+function setBooking(data){localStorage.setItem('rawabiPendingBooking',JSON.stringify(data))}
+function clearQuery(){window.history.replaceState({},document.title,window.location.pathname)}
+function start(){chat.innerHTML='';const label=document.createElement('div');label.className='date-label';label.textContent='اليوم';chat.appendChild(label);addMessage('user','السلام عليكم');addMessage('bot','الروابي شاليهات ترحب بك 🌿<br>نسعد بخدمتك ومساعدتك في حجز الشاليه المناسب بكل سهولة.');addCard(`<button class='reply-btn primary' onclick='openMenu()'>فتح القائمة</button><button class='reply-btn' onclick='contactUs()'>تواصل معنا</button>`);checkReturnedBooking();checkPaymentSuccess()}
+function contactUs(){addMessage('user','تواصل معنا');addMessage('bot','حياك الله، يمكنك بدء الحجز من خلال زر <strong>فتح القائمة</strong> ثم نكمل بقية الإجراءات هنا داخل واتساب.')}
+function openMenu(){addMessage('user','فتح القائمة');addMessage('bot','سيتم فتح القائمة لاختيار الشاليه وتحديد تاريخ الدخول والخروج، ثم ستعود تلقائيًا إلى واتساب لإكمال الإجراء.');setTimeout(()=>{window.location.href='digitalmenu.html'},600)}
+function checkReturnedBooking(){const booking=getBooking();const params=new URLSearchParams(window.location.search);if(params.get('booking')&&booking){addMessage('user',`تم اختيار ${booking.name}`);addCard(`${booking.image?`<div style='height:150px;border-radius:16px;overflow:hidden;margin-bottom:10px'><img src='${booking.image}' alt='${booking.name}' style='width:100%;height:100%;object-fit:cover;display:block'></div>`:''}<div class='summary-grid'><div><small>الشاليه</small><strong>${booking.name}</strong></div><div><small>الليالي</small><strong>${booking.nights} ليلة</strong></div><div><small>الدخول</small><strong>${booking.checkInFormatted}</strong></div><div><small>الخروج</small><strong>${booking.checkOutFormatted}</strong></div><div><small>الأشخاص</small><strong>${booking.guests}</strong></div><div><small>الإجمالي</small><strong>${money(booking.total)} ر.س</strong></div></div>`);addMessage('bot','تم استلام تفاصيل الحجز بنجاح ✅<br>اختر الآن طريقة السداد المناسبة لإكمال الحجز.');showPaymentPlan(booking.total);clearQuery()}}
+function showPaymentPlan(total){addCard(`<div class='note'>يمكنك الآن اختيار <strong>الدفع الكامل</strong> أو <strong>دفع عربون</strong> لتثبيت الحجز أولاً.</div><button class='reply-btn primary' onclick='choosePlan("full", ${Number(total)})'>دفع كامل</button><button class='reply-btn' onclick='choosePlan("deposit", ${Number(total)})'>دفع عربون</button>`)}
+function choosePlan(type,total){paymentPlan=type;paymentAmount=type==='deposit'?Number(total)*DEPOSIT_RATE:Number(total);paymentRemaining=Math.max(0,Number(total)-paymentAmount);addMessage('user',type==='deposit'?'دفع عربون':'دفع كامل');if(type==='deposit'){addMessage('bot',`تم اختيار العربون ✅<br>المبلغ المطلوب الآن: ${money(paymentAmount)} ر.س<br>المتبقي بعد الدفع: ${money(paymentRemaining)} ر.س`)}else{addMessage('bot',`تم اختيار الدفع الكامل ✅<br>المبلغ المطلوب الآن: ${money(paymentAmount)} ر.س`)}showPaymentOptions(paymentAmount,type)}
+function showPaymentOptions(amount,plan){const title=plan==='deposit'?'قيمة العربون':'إجمالي الدفع';addCard(`<div class='pay-grid'><div class='pay-option' onclick='selectPay(this,"stcbank")'><strong>STC Bank</strong><span>الدفع على رقم الجوال السعودي</span><b>${title}: ${money(amount)} ر.س</b></div><div class='pay-option' onclick='selectPay(this,"applepay")'><strong>Apple Pay</strong><span>دفع سريع وآمن</span><b>${title}: ${money(amount)} ر.س</b></div><div class='pay-option' onclick='selectPay(this,"checkout")'><strong>بطاقة بنكية</strong><span>Checkout آمن</span><b>${title}: ${money(amount)} ر.س</b></div></div><button id='continuePay' class='action-btn' style='display:none' onclick='goPay()'>إكمال الدفع</button>`)}
+function selectPay(el,type){paymentMethod=type;document.querySelectorAll('.pay-option').forEach(x=>x.classList.remove('active'));el.classList.add('active');document.getElementById('continuePay').style.display='block'}
+function goPay(){const booking=getBooking();if(!booking)return;setBooking(booking);const qs=new URLSearchParams({total:money(paymentAmount),original_total:money(booking.total),plan:paymentPlan||'full',remaining:money(paymentRemaining)}).toString();let url='checkout.html?'+qs;if(paymentMethod==='stcbank') url='stcbank.html?'+qs;if(paymentMethod==='applepay') url='applepay.html?'+qs;if(paymentMethod==='checkout') url='checkout.html?'+qs;window.location.href=url}
+function buildDetailedText(booking,plan,paidAmount,remaining,source){const paidLabel=plan==='deposit'?'المبلغ المدفوع (عربون)':'المبلغ المدفوع';const statusLine=plan==='deposit'?`المتبقي: ${money(remaining)} ر.س`:'تم دفع كامل المبلغ';return `*الروابي شاليهات*%0A*تفاصيل الحجز*%0A- الشاليه: ${booking.name}%0A- تاريخ الدخول: ${booking.checkInFormatted}%0A- تاريخ الخروج: ${booking.checkOutFormatted}%0A- عدد الليالي: ${booking.nights} ليلة%0A- عدد الأشخاص: ${booking.guests}%0A- إجمالي الحجز: ${money(booking.total)} ر.س%0A- نوع السداد: ${plan==='deposit'?'دفع عربون':'دفع كامل'}%0A- طريقة الدفع: ${source}%0A- ${paidLabel}: ${money(paidAmount)} ر.س%0A- ${statusLine}%0A%0Aنشكر لكم ثقتكم في الروابي شاليهات 🌿`;}
+async function attachmentExists(){if(!PDF_ATTACHMENT_URL) return false;try{const res=await fetch(PDF_ATTACHMENT_URL,{method:'HEAD'});return res.ok}catch(e){return false}}
+function receiptFields(booking,plan,paidAmount,remaining,source){return [
+  ['اسم المنشأة','الروابي شاليهات'],
+  ['اسم الشاليه',booking.name],
+  ['تاريخ الدخول',booking.checkInFormatted],
+  ['تاريخ الخروج',booking.checkOutFormatted],
+  ['عدد الليالي',`${booking.nights} ليلة`],
+  ['عدد الأشخاص',`${booking.guests}`],
+  ['إجمالي الحجز',`${money(booking.total)} ر.س`],
+  ['نوع السداد',plan==='deposit'?'دفع عربون':'دفع كامل'],
+  ['طريقة الدفع',source],
+  ['المدفوع',`${money(paidAmount)} ر.س`],
+  ['المتبقي',`${money(remaining)} ر.س`]
+]}
+function fillReceiptTemplate(data){document.getElementById('receiptStatus').textContent=data.plan==='deposit'?'تم تثبيت الحجز بالعربون':'تم سداد الحجز كاملًا';document.getElementById('receiptPaid').textContent=`${money(data.paidAmount)} ر.س`;document.getElementById('receiptFooter').textContent=data.plan==='deposit'?`تم دفع العربون بنجاح، والمتبقي ${money(data.remaining)} ر.س. يمكن حفظ هذا الإيصال PDF أو إرفاق ملف PDF إضافي من GitHub إذا تم رفعه داخل مجلد documents.`:'تم سداد كامل مبلغ الحجز بنجاح. يمكن حفظ هذا الإيصال PDF أو إرفاق ملف PDF إضافي من GitHub إذا تم رفعه داخل مجلد documents.';document.getElementById('receiptGrid').innerHTML=receiptFields(data.booking,data.plan,data.paidAmount,data.remaining,data.source).map(([label,value])=>`<div class="cell"><small>${label}</small><strong>${value}</strong></div>`).join('')}
+async function generateReceiptPDF(){if(!completedReceipt){alert('لا توجد بيانات حجز مكتملة بعد');return}fillReceiptTemplate(completedReceipt);const target=document.getElementById('receiptTemplate');const canvas=await html2canvas(target,{scale:2,useCORS:true,backgroundColor:'#ffffff'});const imgData=canvas.toDataURL('image/png');const { jsPDF } = window.jspdf;const pdf=new jsPDF('p','mm','a4');const pageWidth=pdf.internal.pageSize.getWidth();const pageHeight=pdf.internal.pageSize.getHeight();const ratio=Math.min(pageWidth/canvas.width,pageHeight/canvas.height);const imgWidth=canvas.width*ratio;const imgHeight=canvas.height*ratio;const x=(pageWidth-imgWidth)/2;const y=12;pdf.addImage(imgData,'PNG',x,y,imgWidth,imgHeight);pdf.save('rawabi-booking-receipt.pdf')}
+async function showFinalActions(booking,plan,paidAmount,remaining,source){completedReceipt={booking,plan,paidAmount,remaining,source};localStorage.setItem('rawabiCompletedBooking',JSON.stringify(booking));const detailsText=buildDetailedText(booking,plan,paidAmount,remaining,source);const hasAttachment=await attachmentExists();const attachmentBtn=hasAttachment?`<a class='ghost-btn' href='${PDF_ATTACHMENT_URL}' target='_blank' rel='noopener' style='display:block;text-decoration:none;text-align:center'>فتح ملف PDF المرفق</a>`:'';addCard(`<div class='note'>تم تجهيز رسالة تأكيد كاملة + إيصال حجز PDF.</div><div class='receipt-mini'><strong>رسالة التأكيد الجاهزة للعميل:</strong><br>${decodeURIComponent(detailsText).replace(/\*|%0A/g,'').replace(/\n/g,'<br>')}</div><button class='action-btn' onclick='openWhatsAppShare()'>إرسال رسالة واتساب بالتفاصيل</button><button class='ghost-btn' onclick='generateReceiptPDF()'>تنزيل PDF الحجز</button>${attachmentBtn}`)}
+function openWhatsAppShare(){if(!completedReceipt){alert('لا توجد رسالة جاهزة بعد');return}const text=buildDetailedText(completedReceipt.booking,completedReceipt.plan,completedReceipt.paidAmount,completedReceipt.remaining,completedReceipt.source);window.open(`https://api.whatsapp.com/send?text=${text}`,'_blank')}
+function checkPaymentSuccess(){const p=new URLSearchParams(window.location.search);if(p.get('payment')==='success'){const booking=getBooking();if(!booking){clearQuery();return}const plan=p.get('plan')||'full';const paidAmount=Number(p.get('total')||0);const remaining=Number(p.get('remaining')||0);let source='بطاقة بنكية';if(p.get('source')==='stcbank') source='STC Bank';if(p.get('source')==='applepay') source='Apple Pay';addMessage('user','تم الدفع');if(plan==='deposit'){addMessage('bot',`تم دفع العربون بنجاح ✅<br>طريقة الدفع: ${source}<br>الشاليه: ${booking.name}<br>المبلغ المدفوع: ${money(paidAmount)} ر.س<br>المتبقي: ${money(remaining)} ر.س<br>تم تثبيت الحجز بالعربون.`)}else{addMessage('bot',`تم تسجيل العملية بنجاح ✅<br>طريقة الدفع: ${source}<br>الشاليه: ${booking.name}<br>المبلغ المدفوع: ${money(paidAmount)} ر.س<br>تم دفع المبلغ كاملًا، والحجز مؤكد.`)}addMessage('bot',`تم تجهيز رسالة التأكيد النهائية للعميل مع كامل تفاصيل الحجز باسم <strong>الروابي شاليهات</strong>.`);showFinalActions(booking,plan,paidAmount,remaining,source);localStorage.removeItem('rawabiPendingBooking');clearQuery()}}
+start();
+</script>
+</body>
+</html>
