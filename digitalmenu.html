@@ -214,7 +214,7 @@ body{
 
   <div class="highlight-box">
     <strong>تم تحديث المنيو بصورك الحقيقية</strong>
-    <span>استخدمت صور الشاليه والمسبح والجلسات والألعاب المائية مباشرة داخل البطاقات حتى يصبح العرض أقرب للواقع وأكثر فخامة بصريًا.</span>
+    <span>تم ربط الصور من GitHub مباشرة من مجلد images لتظهر داخل البطاقات بشكل صحيح في GitHub Pages.</span>
   </div>
 
   <section class="feature-strip">
@@ -239,15 +239,15 @@ body{
 </div>
 
 <script>
-const items=[
+const items = [
   {
     id:1,
     name:'شاليه الروابي جاردن',
     label:'Garden Retreat',
     description:'مساحة خضراء واسعة مع جلسة عائلية هادئة ومسبح خاص يمنح الضيوف خصوصية وراحة طوال فترة الإقامة.',
     price:520,
-    image:'https://www.genspark.ai/api/files/s/fsxsJBMM',
-    gallery:['https://www.genspark.ai/api/files/s/552WozNe','https://www.genspark.ai/api/files/s/MrmdNPdP'],
+    image:'images/chalet-garden-main.jpg',
+    gallery:['images/chalet-garden-gallery-1.jpg','images/hero-thumb-1.jpg'],
     category:'garden',
     guests:10,
     rooms:2,
@@ -259,8 +259,8 @@ const items=[
     label:'Pool View',
     description:'إطلالة مباشرة على المسبح مع جلسة خشبية أنيقة وتكوين بصري فاخر يعطي إحساسًا بالهدوء والاسترخاء.',
     price:680,
-    image:'https://www.genspark.ai/api/files/s/VRbxGUZq',
-    gallery:['https://www.genspark.ai/api/files/s/jgOYUmsA','https://www.genspark.ai/api/files/s/4DRs8Y30'],
+    image:'images/chalet-pool-main.jpg',
+    gallery:['images/chalet-pool-gallery-1.jpg','images/hero-thumb-2.jpg'],
     category:'pool',
     guests:12,
     rooms:3,
@@ -272,8 +272,8 @@ const items=[
     label:'Premium Stay',
     description:'واجهة أنيقة مع مسبح لامع وجلسة خارجية مرتبة، مناسب لمن يبحث عن تجربة أجمل ولمسة أكثر فخامة.',
     price:790,
-    image:'https://www.genspark.ai/api/files/s/ab62AASG',
-    gallery:['https://www.genspark.ai/api/files/s/MrmdNPdP','https://www.genspark.ai/api/files/s/552WozNe'],
+    image:'images/chalet-premium-main.jpg',
+    gallery:['images/chalet-premium-gallery-1.jpg','images/hero-thumb-1.jpg'],
     category:'premium',
     guests:14,
     rooms:3,
@@ -285,66 +285,94 @@ const items=[
     label:'Family Fun',
     description:'خيار عائلي مميز مع ألعاب مائية للأطفال داخل المسبح ومساحة آمنة تعطي العائلة تجربة ترفيهية متكاملة.',
     price:940,
-    image:'https://www.genspark.ai/api/files/s/16T5udfM',
-    gallery:['https://www.genspark.ai/api/files/s/ufsO6NTQ','https://www.genspark.ai/api/files/s/NgtrLfvS'],
+    image:'images/chalet-kids-main.jpg',
+    gallery:['images/chalet-pool-gallery-1.jpg','images/hero-thumb-2.jpg'],
     category:'kids',
     guests:15,
     rooms:4,
     pool:'ألعاب مائية'
   }
 ];
-const heroImages=[
-  'https://www.genspark.ai/api/files/s/fsxsJBMM',
-  'https://www.genspark.ai/api/files/s/ab62AASG',
-  'https://www.genspark.ai/api/files/s/16T5udfM',
-  'https://www.genspark.ai/api/files/s/MrmdNPdP'
+
+const heroImages = [
+  'images/hero-main.jpg',
+  'images/hero-thumb-1.jpg',
+  'images/hero-thumb-2.jpg'
 ];
+
 let selected=null;
 let currentHero=0;
-function formatDate(v){const d=new Date(v);return `${String(d.getDate()).padStart(2,'0')}/${String(d.getMonth()+1).padStart(2,'0')}/${d.getFullYear()}`}
-function nights(a,b){return Math.max(1,Math.ceil((new Date(b)-new Date(a))/86400000))}
+
+function formatDate(v){
+  const d=new Date(v);
+  return `${String(d.getDate()).padStart(2,'0')}/${String(d.getMonth()+1).padStart(2,'0')}/${d.getFullYear()}`;
+}
+
+function nights(a,b){
+  return Math.max(1,Math.ceil((new Date(b)-new Date(a))/86400000));
+}
+
 function setHero(){
   const hero=document.getElementById('heroHeader');
   hero.style.background=`center/cover no-repeat url('${heroImages[currentHero]}')`;
   const thumbs=document.getElementById('heroThumbs');
-  thumbs.innerHTML=heroImages.slice(0,3).map(src=>`<img src='${src}' alt='thumb'>`).join('');
+  thumbs.innerHTML=heroImages.map(src=>`<img src="${src}" alt="thumb">`).join('');
 }
-function cycleHero(){currentHero=(currentHero+1)%heroImages.length;setHero();}
+
+function cycleHero(){
+  currentHero=(currentHero+1)%heroImages.length;
+  setHero();
+}
+
 function render(filter='all'){
   const grid=document.getElementById('menuGrid');
   grid.innerHTML='';
-  items.filter(i=>filter==='all'||i.category===filter).forEach(item=>{
-    const card=document.createElement('div');
-    card.className='menu-card'+(selected&&selected.id===item.id?' active':'');
-    card.innerHTML=`
-      <div class='image-wrap'>
-        <img src='${item.image}' alt='${item.name}'>
-        <div class='image-badge'>متاح للحجز</div>
-        <div class='image-price'>${item.price} ر.س / ليلة</div>
-        <div class='gallery-strip'>${item.gallery.map(src=>`<img src='${src}' alt='gallery'>`).join('')}</div>
-      </div>
-      <div class='menu-card-content'>
-        <div class='title-row'>
-          <div>
-            <h3>${item.name}</h3>
+
+  items
+    .filter(i=>filter==='all'||i.category===filter)
+    .forEach(item=>{
+      const card=document.createElement('div');
+      card.className='menu-card'+(selected&&selected.id===item.id?' active':'');
+
+      card.innerHTML=`
+        <div class="image-wrap">
+          <img src="${item.image}" alt="${item.name}">
+          <div class="image-badge">متاح للحجز</div>
+          <div class="image-price">${item.price} ر.س / ليلة</div>
+          <div class="gallery-strip">
+            ${item.gallery.map(src=>`<img src="${src}" alt="gallery">`).join('')}
           </div>
-          <div class='subtitle'>${item.label}</div>
         </div>
-        <p>${item.description}</p>
-        <div class='tags'>
-          <span class='tag'>👥 ${item.guests} ضيوف</span>
-          <span class='tag'>🛏️ ${item.rooms} غرف</span>
-          <span class='tag'>🏊 ${item.pool}</span>
+        <div class="menu-card-content">
+          <div class="title-row">
+            <div>
+              <h3>${item.name}</h3>
+            </div>
+            <div class="subtitle">${item.label}</div>
+          </div>
+          <p>${item.description}</p>
+          <div class="tags">
+            <span class="tag">👥 ${item.guests} ضيوف</span>
+            <span class="tag">🛏️ ${item.rooms} غرف</span>
+            <span class="tag">🏊 ${item.pool}</span>
+          </div>
+          <div class="pick-row">
+            <div class="pick-note">اختيار هذا الشاليه للمتابعة</div>
+            <button class="select-btn">اختيار الشاليه</button>
+          </div>
         </div>
-        <div class='pick-row'>
-          <div class='pick-note'>اختيار هذا الشاليه للمتابعة</div>
-          <button class='select-btn'>اختيار الشاليه</button>
-        </div>
-      </div>`;
-    card.onclick=()=>{selected=item;render(filter);updateCart();};
-    grid.appendChild(card);
-  });
+      `;
+
+      card.onclick=()=>{
+        selected=item;
+        render(filter);
+        updateCart();
+      };
+
+      grid.appendChild(card);
+    });
 }
+
 function updateCart(){
   const count=document.getElementById('cartCount');
   const itemsBox=document.getElementById('cartItems');
@@ -354,45 +382,64 @@ function updateCart(){
   const inDate=document.getElementById('checkIn').value;
   const outDate=document.getElementById('checkOut').value;
   const guests=document.getElementById('guestCount').value;
+
   count.textContent=selected?1:0;
+
   if(!selected){
     itemsBox.innerHTML='<p style="text-align:center;color:rgba(0,0,0,.42);padding:20px">اختر الشاليه أولاً</p>';
     total.textContent='٠.٠٠ ريال';
     cover.style.display='none';
     return;
   }
+
   coverImg.src=selected.image;
   cover.style.display='block';
+
   const validDates=inDate&&outDate&&new Date(outDate)>new Date(inDate);
   const totalVal=validDates?selected.price*nights(inDate,outDate):selected.price;
+
   itemsBox.innerHTML=`
-    <div class='booking-summary'>
-      <div class='name'>${selected.name}</div>
-      <div class='summary-grid'>
-        <div class='cell'><small>الدخول</small><strong>${inDate?formatDate(inDate):'—'}</strong></div>
-        <div class='cell'><small>الخروج</small><strong>${outDate?formatDate(outDate):'—'}</strong></div>
-        <div class='cell'><small>عدد الأشخاص</small><strong>${guests}</strong></div>
-        <div class='cell'><small>سعر الليلة</small><strong>${selected.price} ر.س</strong></div>
+    <div class="booking-summary">
+      <div class="name">${selected.name}</div>
+      <div class="summary-grid">
+        <div class="cell"><small>الدخول</small><strong>${inDate?formatDate(inDate):'—'}</strong></div>
+        <div class="cell"><small>الخروج</small><strong>${outDate?formatDate(outDate):'—'}</strong></div>
+        <div class="cell"><small>عدد الأشخاص</small><strong>${guests}</strong></div>
+        <div class="cell"><small>سعر الليلة</small><strong>${selected.price} ر.س</strong></div>
       </div>
-    </div>`;
+    </div>
+  `;
+
   total.textContent=`${totalVal.toFixed(2)} ريال`;
 }
+
 function toggleCart(){
   const box=document.getElementById('cartContainer');
   box.style.display=box.style.display==='block'?'none':'block';
 }
+
 function clearSelection(){
   selected=null;
   updateCart();
   render(document.querySelector('.category-btn.active').dataset.category);
   toggleCart();
 }
+
 function openCheckout(){
   const checkIn=document.getElementById('checkIn').value;
   const checkOut=document.getElementById('checkOut').value;
   const guests=+document.getElementById('guestCount').value;
-  if(!selected){alert('اختر الشاليه أولاً');return;}
-  if(!checkIn||!checkOut||new Date(checkOut)<=new Date(checkIn)){alert('حدد تاريخ الدخول والخروج بشكل صحيح');return;}
+
+  if(!selected){
+    alert('اختر الشاليه أولاً');
+    return;
+  }
+
+  if(!checkIn||!checkOut||new Date(checkOut)<=new Date(checkIn)){
+    alert('حدد تاريخ الدخول والخروج بشكل صحيح');
+    return;
+  }
+
   const booking={
     name:selected.name,
     price:selected.price,
@@ -405,22 +452,33 @@ function openCheckout(){
     nights:nights(checkIn,checkOut),
     total:selected.price*nights(checkIn,checkOut)
   };
+
   localStorage.setItem('rawabiPendingBooking',JSON.stringify(booking));
   window.location.href=`index.html?booking=${encodeURIComponent(JSON.stringify(booking))}`;
 }
-document.querySelectorAll('.category-btn').forEach(btn=>btn.onclick=function(){
-  document.querySelectorAll('.category-btn').forEach(b=>b.classList.remove('active'));
-  this.classList.add('active');
-  render(this.dataset.category);
+
+document.querySelectorAll('.category-btn').forEach(btn=>{
+  btn.onclick=function(){
+    document.querySelectorAll('.category-btn').forEach(b=>b.classList.remove('active'));
+    this.classList.add('active');
+    render(this.dataset.category);
+  };
 });
-const t=new Date();t.setDate(t.getDate()+1);
-const o=new Date();o.setDate(o.getDate()+2);
+
+const t=new Date();
+t.setDate(t.getDate()+1);
+
+const o=new Date();
+o.setDate(o.getDate()+2);
+
 document.getElementById('checkIn').value=t.toISOString().split('T')[0];
 document.getElementById('checkOut').value=o.toISOString().split('T')[0];
-document.getElementById('guestCount').innerHTML=Array.from({length:20},(_,i)=>`<option value='${i+1}' ${i+1===2?'selected':''}>${i+1} أشخاص</option>`).join('');
+document.getElementById('guestCount').innerHTML=Array.from({length:20},(_,i)=>`<option value="${i+1}" ${i+1===2?'selected':''}>${i+1} أشخاص</option>`).join('');
+
 document.getElementById('checkIn').onchange=updateCart;
 document.getElementById('checkOut').onchange=updateCart;
 document.getElementById('guestCount').onchange=updateCart;
+
 setHero();
 setInterval(cycleHero,3200);
 render();
