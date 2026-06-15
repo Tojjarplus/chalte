@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Apple Pay - شاليهات الروابي</title>
+<style>
+*{box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",Roboto,Arial,sans-serif}body{margin:0;min-height:100vh;background:radial-gradient(circle at top,#2c2c2e,#000);display:flex;align-items:center;justify-content:center;padding:20px;color:#fff}.sheet{width:100%;max-width:420px;background:rgba(28,28,30,.92);border:1px solid rgba(255,255,255,.08);border-radius:28px;padding:22px;box-shadow:0 20px 50px rgba(0,0,0,.45);backdrop-filter:blur(18px)}.top{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}.brand{font-size:26px;font-weight:800}.title{text-align:center;margin:10px 0 8px;font-size:26px;font-weight:800}.amount{text-align:center;font-size:40px;font-weight:900;margin-bottom:8px}.muted{text-align:center;color:rgba(255,255,255,.7);font-size:14px;line-height:1.8}.card{margin-top:18px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:20px;padding:16px}.row{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;font-size:14px}.row:last-child{margin-bottom:0}.paybtn{width:100%;border:none;border-radius:18px;padding:16px 18px;font-size:16px;font-weight:800;cursor:pointer;background:#fff;color:#000;margin-top:18px}.success{display:none;text-align:center;padding:18px 0}.icon{width:76px;height:76px;border-radius:50%;background:#fff;color:#000;display:grid;place-items:center;font-size:34px;margin:0 auto 18px}
+</style>
+</head>
+<body>
+<div class="sheet" id="paySheet">
+  <div class="top"><div>إلغاء</div><div class="brand"> Pay</div><div></div></div>
+  <div class="title">شاليهات الروابي</div>
+  <div class="amount" id="amount">﷼ 0.00</div>
+  <div class="muted">دفع سريع وآمن باستخدام Apple Pay</div>
+  <div class="card">
+    <div class="row"><span>البطاقة</span><strong>Apple Card</strong></div>
+    <div class="row"><span>الحالة</span><strong>جاهز للدفع</strong></div>
+    <div class="row"><span>المرجع</span><strong>RAWABI DEMO</strong></div>
+  </div>
+  <button class="paybtn" onclick="processApplePay()">تأكيد بـ Apple Pay</button>
+</div>
+<div class="sheet success" id="successSheet"><div class="icon">✓</div><h2>تم الدفع بنجاح</h2><p class="muted">جاري الرجوع إلى واتساب...</p></div>
+<script>
+const params=new URLSearchParams(window.location.search);const total=params.get('total')||'0.00';document.getElementById('amount').textContent=`﷼ ${total}`;
+function processApplePay(){document.getElementById('paySheet').style.display='none';document.getElementById('successSheet').style.display='block';setTimeout(()=>{window.location.href='index.html?payment=success&source=applepay'},1400)}
+</script>
+</body>
+</html>
