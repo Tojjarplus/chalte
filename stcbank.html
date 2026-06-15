@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+<title>STC Bank</title>
+<style>
+:root{--stc-green:linear-gradient(135deg,#1fd18b,#7ae582);--stc-green-solid:#1fd18b;--border:#e5e7eb;--text:#374151;--shadow:0 10px 30px rgba(0,0,0,.08);--radius:16px}*{box-sizing:border-box}body{margin:0;background:#f3f4f6;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:16px}.container{width:100%;max-width:420px;background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden;position:relative}.header{display:flex;justify-content:space-between;align-items:center;padding:20px;border-bottom:1px solid #f1f1f1;background:#fff;gap:12px}.brand{display:flex;align-items:center;gap:12px;flex:1;min-width:0}.logo{width:48px;height:48px;border-radius:14px;background:var(--stc-green);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:18px;flex-shrink:0}.brand h2{margin:0;font-size:18px;color:#111827}.merchant{font-size:13px;color:#555;line-height:1.4;text-align:left;padding:8px 0}.order-summary{background:#f8f9fa;border-radius:12px;padding:18px;margin:20px;border:1px solid #e9ecef}.order-summary h4{margin:0 0 16px 0;color:#2d3748;font-size:17px;font-weight:600}.order-detail{display:flex;justify-content:space-between;margin-bottom:10px;font-size:15px;color:#4a5568;padding:6px 0}.order-detail.total{margin-top:14px;padding-top:14px;border-top:2px solid #e2e8f0;font-weight:700;color:#1a202c;font-size:19px}.form-section{padding:0 20px;margin-bottom:24px}.label{font-size:15px;margin-bottom:8px;color:var(--text);font-weight:500;display:block}input{width:100%;padding:16px 18px;border-radius:12px;border:1px solid var(--border);font-size:16px;outline:none;background:#fff;transition:all .2s ease;font-family:inherit}input:focus{border-color:var(--stc-green-solid);box-shadow:0 0 0 3px rgba(31,209,139,.1)}button{width:calc(100% - 40px);margin:22px 20px 0;padding:18px;border:none;border-radius:14px;font-size:17px;font-weight:600;color:#fff;background:#d1d5db;cursor:not-allowed;transition:all .3s ease;display:block}button.active{background:var(--stc-green);cursor:pointer;box-shadow:0 4px 15px rgba(31,209,139,.3)}.hidden{display:none !important}.status{margin:25px 20px;color:var(--text);font-size:16px;text-align:center;padding:16px;background:#f8f9fa;border-radius:12px;border:1px solid #e9ecef}.success{padding:20px;text-align:center}.success h3{color:var(--stc-green-solid);font-size:24px;margin:20px 0 12px}.success p{color:#4b5563;font-size:16px;margin:12px 0;line-height:1.5}.success-info{font-size:14px;color:#6b7280;margin-top:20px;padding:12px;background:#f9fafb;border-radius:10px}@media (max-width:480px){.header{padding:16px}.order-summary,.form-section,.status,.success{margin-left:16px;margin-right:16px}.form-section{padding:0}button{width:calc(100% - 32px);margin-left:16px;margin-right:16px}}
+</style>
+</head>
+<body>
+<div class="container" id="paymentPage">
+  <div class="header">
+    <div class="brand">
+      <div class="logo">S</div>
+      <div>
+        <h2>STC Bank</h2>
+        <div class="merchant">شاليهات الروابي</div>
+      </div>
+    </div>
+  </div>
+  <div class="order-summary">
+    <h4>ملخص الحجز</h4>
+    <div class="order-detail"><span>الخدمة</span><span>حجز شاليه</span></div>
+    <div class="order-detail"><span>نوع السداد</span><span id="planLabel">دفع كامل</span></div>
+    <div class="order-detail total"><span>الإجمالي المطلوب</span><span id="orderAmount">520.00 ر.س</span></div>
+  </div>
+  <div class="form-section">
+    <label class="label">رقم الجوال السعودي</label>
+    <input type="text" value="0531304279" readonly>
+  </div>
+  <div class="form-section">
+    <label class="label">رمز التحقق OTP</label>
+    <input type="text" id="otpInput" placeholder="أدخل رمز التحقق" maxlength="4">
+  </div>
+  <button id="payBtn">تأكيد العملية</button>
+  <div class="status">بعد نجاح العملية سيتم الرجوع تلقائيًا إلى واتساب</div>
+</div>
+<div class="container hidden" id="successPage">
+  <div class="success">
+    <h3>تم الدفع بنجاح</h3>
+    <p>تم تسجيل العملية بنجاح وإرسال حالة الدفع إلى واتساب.</p>
+    <div class="success-info" id="successInfo">جاري الرجوع إلى واتساب...</div>
+  </div>
+</div>
+<script>
+const params=new URLSearchParams(window.location.search);const total=params.get('total')||'520.00';const plan=params.get('plan')||'full';const remaining=params.get('remaining')||'0.00';document.getElementById('orderAmount').textContent=`${total} ر.س`;document.getElementById('planLabel').textContent=plan==='deposit'?'دفع عربون':'دفع كامل';if(plan==='deposit'){document.getElementById('successInfo').textContent=`المتبقي بعد العربون: ${remaining} ر.س • جاري الرجوع إلى واتساب...`;}const otpInput=document.getElementById('otpInput');const payBtn=document.getElementById('payBtn');function updateButtonState(){payBtn.classList.toggle('active',otpInput.value.trim().length===4)}otpInput.addEventListener('input',updateButtonState);payBtn.addEventListener('click',function(){if(!payBtn.classList.contains('active'))return;document.getElementById('paymentPage').classList.add('hidden');document.getElementById('successPage').classList.remove('hidden');setTimeout(()=>{window.location.href=`index.html?payment=success&source=stcbank&plan=${encodeURIComponent(plan)}&total=${encodeURIComponent(total)}&remaining=${encodeURIComponent(remaining)}`},1600)});
+</script>
+</body>
+</html>
